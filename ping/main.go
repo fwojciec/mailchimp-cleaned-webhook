@@ -7,9 +7,8 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
-type handler struct{}
-
-func (h *handler) Handler(ctx context.Context) (*events.APIGatewayProxyResponse, error) {
+// Mailchimp verifies webhook url by sending a GET request and looking for 200 response
+func Handler(ctx context.Context) (*events.APIGatewayProxyResponse, error) {
 	resp := events.APIGatewayProxyResponse{
 		StatusCode:      200,
 		IsBase64Encoded: false,
@@ -20,6 +19,5 @@ func (h *handler) Handler(ctx context.Context) (*events.APIGatewayProxyResponse,
 }
 
 func main() {
-	h := handler{}
-	lambda.Start(h.Handler)
+	lambda.Start(Handler)
 }
